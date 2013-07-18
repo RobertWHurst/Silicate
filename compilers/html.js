@@ -1,0 +1,1 @@
+exports.mimeType = 'text/html';
