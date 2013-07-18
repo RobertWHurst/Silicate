@@ -2,7 +2,7 @@
   "name": "Silicate",
   "version": "0.0.1",
   "description": "Silicate is an MVC framework for Node inspired by Ruby on Rails",
-  "main": "./lib/silicate",
+  "main": "./main",
   "bin": {
     "Silicate": "cli.js"
   },
@@ -12,6 +12,7 @@
   "dependencies": {
     "commander": "~1.3.0",
     "connect": "~2.8.4",
+    "send": "~0.1.3",
     "fs-extra": "~0.6.3"
   },
   "devDependencies": {},

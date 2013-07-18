@@ -1,7 +1,7 @@
 #! /usr/local/bin/node
 
 var program = require('commander');
-var Silicate = require('../');
+var silicate = require('../');
 var fs = require('fs-extra');
 
 program
@@ -17,7 +17,7 @@ if(typeof program.port != 'number') { throw new Error('<port> must be a number.'
 if(typeof program.args[0] != 'string') { throw new Error('<appPath> must be a valid path to a silicate application.'); }
 
 // execute silicate
-new Silicate({
+silicate({
   verbose: program.verbose,
   port: program.port,
   config: program.config,
