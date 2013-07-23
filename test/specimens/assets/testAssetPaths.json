@@ -1,0 +1,6 @@
+{
+  "views": {
+    "html": "view.html",
+    "ejs": "view.html.ejs"
+  }
+}
