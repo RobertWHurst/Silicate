@@ -7,9 +7,11 @@ var fs = require('fs-extra');
 program
   .version('0.0.1')
   .usage('[options] <appPath>')
-  .option('-p, --port [port]', 'Force the application to listen on a given port. Overrides the application\'s app.json', 8000)
+  .option('-e, --environment [name]', 'The environment you wish to run your app in', 'development')
+  .option('-p, --port [number]', 'Force the application to listen on a given port. Overrides the application\'s app.json', 8000)
   .option('-v, --verbose', 'Enable verbose logging to the CLI')
-  .option('-c, --config [configPath]', 'Path to config file', './config')
+  .option('-c, --config [path]', 'Path to config file', './config')
+  .option('-l, --log [path]', 'Path to log file')
   .parse(process.argv);
 
 // validate
@@ -18,6 +20,7 @@ if(typeof program.args[0] != 'string') { throw new Error('<appPath> must be a va
 
 // execute silicate
 silicate({
+  env: program.environment
   verbose: program.verbose,
   port: program.port,
   config: program.config,
