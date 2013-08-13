@@ -1,0 +1,82 @@
+module.exports = function(router) {
+
+  // URL to Controller#Action binding
+  router.get('/patients/:id', { to: 'patients#show' }); //targets patients#show
+  router.get('/patients/:id', { to: 'patients#show', as: 'patient' }); //targets patients#show and treats :id as a patient
+
+  // Resources (many)
+  router.resources('photos'); // creates photos resource. Same as:
+                              // get('/photos', { to: 'photos#index' }
+                              // get('/photos/new', { to: 'photos#new' }
+                              // post('/photos', { to: 'photos#create' }
+                              // get('/photos/:id', { to: 'photos#show' }
+                              // get('/photos/:id/edit', { to: 'photos#edit' }
+                              // put('/photos/:id', { to: 'photos#update' } //Full replacement
+                              // patch('/photos/:id', { to: 'photos#update' } //Delta update
+                              // delete('/photos/:id', { to: 'photos#destroy' }
+
+  // Resource (one)
+  router.resource('geocoder'); // creates geocoder resource. Same as:
+                               // get('/geocoder/new', { to: 'geocoder#new' }
+                               // post('/geocoder', { to: 'geocoder#create' }
+                               // get('/geocoder', { to: 'geocoder#show' }
+                               // get('/geocoder/edit', { to: 'geocoder#edit' }
+                               // put('/geocoder', { to: 'geocoder#update' } //Full replacement
+                               // patch('/geocoder', { to: 'geocoder#update' } //Delta update
+                               // delete('/geocoder', { to: 'geocoder#destroy' }
+
+  // Namespace
+  router.namespace('admin', function(namespace) {
+    namespace.resources('posts'); // creates posts resource. Same as:
+                                  // get('/admin/posts', { to: 'admin:posts#index' }
+                                  // get('/admin/posts/new', { to: 'admin:posts#new' }
+                                  // post('/admin/posts', { to: 'admin:posts#create' }
+                                  // get('/admin/posts/:id', { to: 'admin:posts#show' }
+                                  // get('/admin/posts/:id/edit', { to: 'admin:posts#edit' }
+                                  // put('/admin/posts/:id', { to: 'admin:posts#update' } //Full replacement
+                                  // patch('/admin/posts/:id', { to: 'admin:posts#update' } //Delta update
+                                  // delete('/admin/posts/:id', { to: 'admin:posts#destroy' }
+  });
+
+  // Module Scope
+  router.scope({ module: 'admin' }, function(scope) {
+    scope.resources('posts'); // creates posts resource. Same as:
+                              // get('/posts', { to: 'admin:posts#index' }
+                              // get('/posts/new', { to: 'admin:posts#new' }
+                              // post('/posts', { to: 'admin:posts#create' }
+                              // get('/posts/:id', { to: 'admin:posts#show' }
+                              // get('/posts/:id/edit', { to: 'admin:posts#edit' }
+                              // put('/posts/:id', { to: 'admin:posts#update' } //Full replacement
+                              // patch('/posts/:id', { to: 'admin:posts#update' } //Delta update
+                              // delete('/posts/:id', { to: 'admin:posts#destroy' }
+  });
+  router.resources('posts', { module: 'admin' }); // same as above
+
+  // Path Scope
+  router.scope('admin', function(scope) {
+    scope.resources('posts'); // creates posts resource. Same as:
+                              // get('/admin/posts', { to: 'posts#index' }
+                              // get('/admin/posts/new', { to: 'posts#new' }
+                              // post('/admin/posts', { to: 'posts#create' }
+                              // get('/admin/posts/:id', { to: 'posts#show' }
+                              // get('/admin/posts/:id/edit', { to: 'posts#edit' }
+                              // put('/admin/posts/:id', { to: 'posts#update' } //Full replacement
+                              // patch('/admin/posts/:id', { to: 'posts#update' } //Delta update
+                              // delete('/admin/posts/:id', { to: 'posts#destroy' }
+  });
+  router.resources('posts', { path: '/admin/posts' }); // same as above
+
+  // Nested Resources
+  router.resources('magazines', function(resource) {
+    resource.resources('ads'); // creates ads resource belonging to a magazines resource. Same as:
+                               // get('/magazines/:magazineId/ads', { to: 'ads#index' }
+                               // get('/magazines/:magazineId/ads/new', { to: 'ads#new' }
+                               // post('/magazines/:magazineId/ads', { to: 'ads#create' }
+                               // get('/magazines/:magazineId/ads/:id', { to: 'ads#show' }
+                               // get('/magazines/:magazineId/ads/:id/edit', { to: 'ads#edit' }
+                               // put('/magazines/:magazineId/ads/:id', { to: 'ads#update' } //Full replacement
+                               // patch('/magazines/:magazineId/ads/:id', { to: 'ads#update' } //Delta update
+                               // delete('/magazines/:magazineId/ads/:id', { to: 'ads#destroy' }
+  });
+});
+
