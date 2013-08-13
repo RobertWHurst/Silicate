@@ -30,13 +30,11 @@ describe('config.init()', function() {
     });
   });
 });
-
 describe('config.ready', function() {
   it('is false before loading completes', function() {
     var config = new Config(CONFIG_PATH);
     config.ready.should.be.false;
   });
-
   it('is true once loading is complete', function(done) {
     var config = new Config(CONFIG_PATH);
     config.init(function(err, config) {
@@ -45,7 +43,6 @@ describe('config.ready', function() {
     });
   });
 });
-
 describe('config[configId]', function() {
   it('exists for each config containing their data', function(done) {
     var config = new Config(CONFIG_PATH);
